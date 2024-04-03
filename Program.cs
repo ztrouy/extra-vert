@@ -532,6 +532,20 @@ void AverageLightNeed() {
 }
 
 void AdoptedPlantsPercentage() {
-    throw new NotImplementedException();
+    int adoptedPlants = 0;
+    int availablePlants = 0;
+
+    foreach (Plant plant in plants) {
+        if (plant.Sold) {
+            adoptedPlants++;
+        }
+        else {
+            availablePlants++;
+        }
+    }
+
+    double adoptedPercentage = ((double)adoptedPlants / (adoptedPlants + availablePlants)) * 100;
+
+    Console.WriteLine($"Current adoption percentage is {adoptedPercentage}%\n");
 }
 
