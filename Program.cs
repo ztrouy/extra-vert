@@ -103,7 +103,8 @@ void MainMenu() {
 void ListAllPlants() {
     Console.WriteLine("These are our plants!");
     for (int i = 0; i < plants.Count; i++) {
-        Console.WriteLine($"    {i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for ${plants[i].AskingPrice}");
+        // Console.WriteLine($"    {i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for ${plants[i].AskingPrice}");
+        Console.WriteLine($"{i + 1}. {PlantDetails(plants[i])}");
     }
     Console.WriteLine("");
 }
@@ -551,7 +552,7 @@ void AdoptedPlantsPercentage() {
 
 
 string PlantDetails(Plant plant) {
-    string plantString = $"{plant.Species} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for {plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
+    string plantString = $"{plant.Species} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for ${plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
 
     return plantString;
 }
