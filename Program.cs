@@ -460,20 +460,20 @@ void StatisticsMenu() {
             case "0":
                 break;
             case "1":
-                throw new NotImplementedException();
-                // break;
+                LowestPrice();
+                break;
             case "2":
-                throw new NotImplementedException();
-                // break;
+                AvailablePlantsCount();
+                break;
             case "3":
-                throw new NotImplementedException();
-                // break;
+                HighestLightNeed();
+                break;
             case "4":
-                throw new NotImplementedException();
-                // break;
+                AverageLightNeed();
+                break;
             case "5":
-                throw new NotImplementedException();
-                // break;
+                AdoptedPlantsPercentage();
+                break;
             default:
                 Console.WriteLine("Invalid choice selected, please try again\n");
                 break;
@@ -483,5 +483,69 @@ void StatisticsMenu() {
 
 
 void LowestPrice() {
-    Console.WriteLine("");
+    Plant chosenPlant = plants[0];
+
+    foreach(Plant plant in plants) {
+        if (plant.AskingPrice < chosenPlant.AskingPrice) {
+            chosenPlant = plant;
+        }
+    }
+    
+    Console.WriteLine($"The plant with the lowest price is {chosenPlant.Species} at ${chosenPlant.AskingPrice}\n");
 }
+
+void AvailablePlantsCount() {
+    int availablePlantCount = 0;
+
+    foreach(Plant plant in plants) {
+        if (!plant.Sold & plant.AvailableUntil > DateTime.Now) {
+            availablePlantCount++;
+        }
+    }
+
+    Console.WriteLine($"There are currently {availablePlantCount} plants available for adoption\n");
+}
+
+void HighestLightNeed() {
+    Plant foundPlant = plants[0];
+
+    foreach (Plant plant in plants) {
+        if (plant.LightNeeds > foundPlant.LightNeeds) {
+            foundPlant = plant;
+        }
+    }
+
+    Console.WriteLine($"The plant with the greatest light needs is {foundPlant.Species}, with a light need rating of {foundPlant.LightNeeds}\n");
+}
+
+void AverageLightNeed() {
+    int totalLightNeed = 0;
+
+    foreach (Plant plant in plants) {
+        totalLightNeed += plant.LightNeeds;
+    }
+
+    double totalLightNeedAsDouble = (double)totalLightNeed;
+    double averageLightNeed = totalLightNeedAsDouble / plants.Count;
+
+    Console.WriteLine($"The average light need of all plants is {averageLightNeed}\n");
+}
+
+void AdoptedPlantsPercentage() {
+    int adoptedPlants = 0;
+    int availablePlants = 0;
+
+    foreach (Plant plant in plants) {
+        if (plant.Sold) {
+            adoptedPlants++;
+        }
+        else {
+            availablePlants++;
+        }
+    }
+
+    double adoptedPercentage = ((double)adoptedPlants / (adoptedPlants + availablePlants)) * 100;
+
+    Console.WriteLine($"Current adoption percentage is {adoptedPercentage}%\n");
+}
+
