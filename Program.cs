@@ -283,7 +283,7 @@ void AdoptPlant() {
     
     Console.WriteLine("These are all of our available plants!");
     for (int i = 0; i < availablePlants.Count; i++) {
-        Console.WriteLine($"    {i + 1}. {availablePlants[i].Species} in {availablePlants[i].City} is available for ${plants[i].AskingPrice}");
+        Console.WriteLine($"    {i + 1}. {PlantDetails(availablePlants[i])}");
     }
 
     Plant chosenPlant = null;
