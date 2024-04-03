@@ -103,7 +103,6 @@ void MainMenu() {
 void ListAllPlants() {
     Console.WriteLine("These are our plants!");
     for (int i = 0; i < plants.Count; i++) {
-        // Console.WriteLine($"    {i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for ${plants[i].AskingPrice}");
         Console.WriteLine($"{i + 1}. {PlantDetails(plants[i])}");
     }
     Console.WriteLine("");
