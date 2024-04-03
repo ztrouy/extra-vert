@@ -460,8 +460,8 @@ void StatisticsMenu() {
             case "0":
                 break;
             case "1":
-                throw new NotImplementedException();
-                // break;
+                LowestPrice();
+                break;
             case "2":
                 throw new NotImplementedException();
                 // break;
@@ -483,5 +483,13 @@ void StatisticsMenu() {
 
 
 void LowestPrice() {
-    Console.WriteLine("");
+    Plant chosenPlant = plants[0];
+
+    foreach(Plant plant in plants) {
+        if (plant.AskingPrice < chosenPlant.AskingPrice) {
+            chosenPlant = plant;
+        }
+    }
+    
+    Console.WriteLine($"The plant with the lowest price is {chosenPlant.Species} at ${chosenPlant.AskingPrice}\n");
 }
