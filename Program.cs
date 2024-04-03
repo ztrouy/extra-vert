@@ -463,17 +463,17 @@ void StatisticsMenu() {
                 LowestPrice();
                 break;
             case "2":
-                throw new NotImplementedException();
-                // break;
+                AvailablePlantsCount();
+                break;
             case "3":
-                throw new NotImplementedException();
-                // break;
+                HighestLightNeed();
+                break;
             case "4":
-                throw new NotImplementedException();
-                // break;
+                AverageLightNeed();
+                break;
             case "5":
-                throw new NotImplementedException();
-                // break;
+                AdoptedPlantsPercentage();
+                break;
             default:
                 Console.WriteLine("Invalid choice selected, please try again\n");
                 break;
@@ -493,3 +493,20 @@ void LowestPrice() {
     
     Console.WriteLine($"The plant with the lowest price is {chosenPlant.Species} at ${chosenPlant.AskingPrice}\n");
 }
+
+void AvailablePlantsCount() {
+    throw new NotImplementedException();
+}
+
+void HighestLightNeed() {
+    throw new NotImplementedException();
+}
+
+void AverageLightNeed() {
+    throw new NotImplementedException();
+}
+
+void AdoptedPlantsPercentage() {
+    throw new NotImplementedException();
+}
+
