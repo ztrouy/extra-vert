@@ -495,7 +495,15 @@ void LowestPrice() {
 }
 
 void AvailablePlantsCount() {
-    throw new NotImplementedException();
+    int availablePlantCount = 0;
+
+    foreach(Plant plant in plants) {
+        if (!plant.Sold & plant.AvailableUntil > DateTime.Now) {
+            availablePlantCount++;
+        }
+    }
+
+    Console.WriteLine($"There are currently {availablePlantCount} plants available for adoption");
 }
 
 void HighestLightNeed() {
