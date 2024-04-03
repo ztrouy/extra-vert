@@ -451,7 +451,7 @@ void StatisticsMenu() {
     2. Number of Plants Available
     3. Plant with Highest Light Needs
     4. Average Light Needs
-    5. Percentage of Plants Adopted
+    5. Percentage of Plants Adoptednm,j
         ");
 
         userChoice = Console.ReadLine()!.Trim();
@@ -547,5 +547,12 @@ void AdoptedPlantsPercentage() {
     double adoptedPercentage = ((double)adoptedPlants / (adoptedPlants + availablePlants)) * 100;
 
     Console.WriteLine($"Current adoption percentage is {adoptedPercentage}%\n");
+}
+
+
+string PlantDetails(Plant plant) {
+    string plantString = $"{plant.Species} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for {plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
+
+    return plantString;
 }
 
