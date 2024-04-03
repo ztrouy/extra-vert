@@ -427,7 +427,7 @@ void PlantOfTheDay() {
     List<Plant> availablePlants = new List<Plant>();
 
     foreach (Plant plant in plants) {
-        if (!plant.Sold) {
+        if (!plant.Sold & plant.AvailableUntil >= DateTime.Now) {
             availablePlants.Add(plant);
         }
     }
@@ -438,7 +438,7 @@ void PlantOfTheDay() {
     Plant randomPlant = availablePlants[randomInteger];
 
     Console.WriteLine("Random Plant of the Day!");
-    Console.WriteLine($"\n{randomPlant.Species}, found in {randomPlant.City}, with a light need of {randomPlant.LightNeeds}, and costs ${randomPlant.AskingPrice}\n");
+    Console.WriteLine($"\n{PlantDetails(randomPlant)}\n");
 }
 
 void StatisticsMenu() {
