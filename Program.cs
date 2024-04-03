@@ -503,11 +503,19 @@ void AvailablePlantsCount() {
         }
     }
 
-    Console.WriteLine($"There are currently {availablePlantCount} plants available for adoption");
+    Console.WriteLine($"There are currently {availablePlantCount} plants available for adoption\n");
 }
 
 void HighestLightNeed() {
-    throw new NotImplementedException();
+    Plant foundPlant = plants[0];
+
+    foreach (Plant plant in plants) {
+        if (plant.LightNeeds > foundPlant.LightNeeds) {
+            foundPlant = plant;
+        }
+    }
+
+    Console.WriteLine($"The plant with the greatest light needs is {foundPlant.Species}, with a light need rating of {foundPlant.LightNeeds}\n");
 }
 
 void AverageLightNeed() {
