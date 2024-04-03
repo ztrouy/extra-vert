@@ -103,7 +103,8 @@ void MainMenu() {
 void ListAllPlants() {
     Console.WriteLine("These are our plants!");
     for (int i = 0; i < plants.Count; i++) {
-        Console.WriteLine($"    {i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for ${plants[i].AskingPrice}");
+        // Console.WriteLine($"    {i + 1}. {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for ${plants[i].AskingPrice}");
+        Console.WriteLine($"{i + 1}. {PlantDetails(plants[i])}");
     }
     Console.WriteLine("");
 }
@@ -282,7 +283,7 @@ void AdoptPlant() {
     
     Console.WriteLine("These are all of our available plants!");
     for (int i = 0; i < availablePlants.Count; i++) {
-        Console.WriteLine($"    {i + 1}. {availablePlants[i].Species} in {availablePlants[i].City} is available for ${plants[i].AskingPrice}");
+        Console.WriteLine($"    {i + 1}. {PlantDetails(availablePlants[i])}");
     }
 
     Plant chosenPlant = null;
@@ -426,7 +427,7 @@ void PlantOfTheDay() {
     List<Plant> availablePlants = new List<Plant>();
 
     foreach (Plant plant in plants) {
-        if (!plant.Sold) {
+        if (!plant.Sold & plant.AvailableUntil >= DateTime.Now) {
             availablePlants.Add(plant);
         }
     }
@@ -437,7 +438,7 @@ void PlantOfTheDay() {
     Plant randomPlant = availablePlants[randomInteger];
 
     Console.WriteLine("Random Plant of the Day!");
-    Console.WriteLine($"\n{randomPlant.Species}, found in {randomPlant.City}, with a light need of {randomPlant.LightNeeds}, and costs ${randomPlant.AskingPrice}\n");
+    Console.WriteLine($"\n{PlantDetails(randomPlant)}\n");
 }
 
 void StatisticsMenu() {
@@ -451,7 +452,7 @@ void StatisticsMenu() {
     2. Number of Plants Available
     3. Plant with Highest Light Needs
     4. Average Light Needs
-    5. Percentage of Plants Adopted
+    5. Percentage of Plants Adoptednm,j
         ");
 
         userChoice = Console.ReadLine()!.Trim();
@@ -547,5 +548,12 @@ void AdoptedPlantsPercentage() {
     double adoptedPercentage = ((double)adoptedPlants / (adoptedPlants + availablePlants)) * 100;
 
     Console.WriteLine($"Current adoption percentage is {adoptedPercentage}%\n");
+}
+
+
+string PlantDetails(Plant plant) {
+    string plantString = $"{plant.Species} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for ${plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
+
+    return plantString;
 }
 
