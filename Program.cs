@@ -519,7 +519,16 @@ void HighestLightNeed() {
 }
 
 void AverageLightNeed() {
-    throw new NotImplementedException();
+    int totalLightNeed = 0;
+
+    foreach (Plant plant in plants) {
+        totalLightNeed += plant.LightNeeds;
+    }
+
+    double totalLightNeedAsDouble = (double)totalLightNeed;
+    double averageLightNeed = totalLightNeedAsDouble / plants.Count;
+
+    Console.WriteLine($"The average light need of all plants is {averageLightNeed}\n");
 }
 
 void AdoptedPlantsPercentage() {
