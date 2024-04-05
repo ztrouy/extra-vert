@@ -1,6 +1,7 @@
 ﻿List<Plant> plants = new List<Plant>() {
     new Plant() {
         Species = "Magnificus Troggloditus",
+        Type = "tree",
         LightNeeds = 1,
         AskingPrice = 19.99M,
         City = "Magnificus' Tower",
@@ -10,6 +11,7 @@
     },
     new Plant() {
         Species = "Goobertus Forgotis",
+        Type = "tree",
         LightNeeds = 2,
         AskingPrice = 00.01M,
         City = "Unknown",
@@ -19,6 +21,7 @@
     },
     new Plant() {
         Species = "Stoatus Robotus",
+        Type = "herb",
         LightNeeds = 3,
         AskingPrice = 101.01M,
         City = "P03 Factory",
@@ -28,6 +31,7 @@
     },
     new Plant() {
         Species = "Grimordia Strikita",
+        Type = "flower",
         LightNeeds = 4,
         AskingPrice = 99.95M,
         City = "Graveyard",
@@ -37,6 +41,7 @@
     },
     new Plant() {
         Species = "Leshum Superba",
+        Type = "bush",
         LightNeeds = 5,
         AskingPrice = 59.99M,
         City = "Cabinwood",
@@ -136,6 +141,7 @@ void InventoryBySpecies() {
 void PostPlant() {
     Plant newPlant = new Plant() {
         Species = "",
+        Type = "",
         LightNeeds = 0,
         AskingPrice = 0.00M,
         City = "",
@@ -153,6 +159,35 @@ void PostPlant() {
         }
         catch (FormatException) {
             Console.WriteLine("Please input a string");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
+    Console.WriteLine("\nWhat is the type of plant?");
+    string[] plantTypes =
+    {
+        "tree",
+        "bush",
+        "flower", 
+        "herb"
+    };
+    for (int i = 0; i < plantTypes.Length; i++) {
+        Console.WriteLine($"{i + 1}. {plantTypes[i]}");
+    }
+    while (newPlant.Type == "") {
+        Console.WriteLine("Type of species:");
+        try {
+            int response = int.Parse(Console.ReadLine()!.Trim());
+            newPlant.Type = plantTypes[response - 1];
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (IndexOutOfRangeException) {
+            Console.WriteLine("Please pick a valid integer!");
         }
         catch (Exception ex) {
             Console.WriteLine(ex);
@@ -576,7 +611,7 @@ void AdoptedPlantsPercentage() {
 
 
 string PlantDetails(Plant plant) {
-    string plantString = $"{plant.Species} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for ${plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
+    string plantString = $"{plant.Species}, a {plant.Type} from {plant.City}, {plant.ZIP}, with a light need of {plant.LightNeeds}{(plant.Sold ? $", and was sold for ${plant.AskingPrice}" : "")}{(!plant.Sold & plant.AvailableUntil > DateTime.Now ? $", and is available for ${plant.AskingPrice}" : "")}";
 
     return plantString;
 }
