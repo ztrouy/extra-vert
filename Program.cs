@@ -63,6 +63,7 @@ void MainMenu() {
     5. Search for a Plant
     6. Plant of the Day
     7. Statistics
+    8. Inventory by Species
         ");
 
         userChoice = Console.ReadLine();
@@ -92,6 +93,9 @@ void MainMenu() {
             case "7":
                 StatisticsMenu();
                 break;
+            case "8":
+                InventoryBySpecies();
+                break;
             default:
                 Console.WriteLine("Invalid choice selected, please try again\n");
                 break;
@@ -106,6 +110,27 @@ void ListAllPlants() {
         Console.WriteLine($"{i + 1}. {PlantDetails(plants[i])}");
     }
     Console.WriteLine("");
+}
+
+void InventoryBySpecies() {
+    Dictionary<string, int> inventory = new Dictionary<string, int>();
+
+    foreach (Plant plant in plants) {
+        int speciesCount;
+        bool speciesCountSuccess = inventory.TryGetValue(plant.Species, out speciesCount);
+
+        if (speciesCountSuccess) {
+            speciesCount++;
+            inventory[plant.Species] = speciesCount;
+        }
+        else {
+            inventory.Add(plant.Species, 1);
+        }
+    }
+
+    foreach (KeyValuePair<string, int> item in inventory) {
+        Console.WriteLine($"Species: {item.Key}, Amount: {item.Value}");
+    }
 }
 
 void PostPlant() {
