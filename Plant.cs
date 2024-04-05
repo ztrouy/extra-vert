@@ -1,5 +1,6 @@
 public class Plant {
     public string Species {get; set;}
+    public string Type {get; set;}
     public int LightNeeds {get; set;}
     public decimal AskingPrice {get; set;}
     public string City {get; set;}
